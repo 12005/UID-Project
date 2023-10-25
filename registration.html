@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Amrita Workshop Registration</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Amrita Workshop!</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="event1.html">AI Workshop</a></li>
+            <li><a href="event2.html">Web Dev Workshop</a></li>
+            <li><a href="event3.html">Cybersecurity Workshop</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2 class="hover-effect">Registration Form</h2>
+        <form id="registration-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required><br><br>
+
+            <label for="department">Department:</label>
+            <select id="department" name="department">
+                <option value="CSE">CSE</option>
+                <option value="AI">AI</option>
+                <option value="CYE">CYE</option>
+                <option value="CEE">CEE</option>
+            </select><br><br>
+
+            <label for="state">State:</label>
+            <select id="state" name="state">
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Delhi">Delhi</option>
+            </select><br><br>
+
+            <label>Events of Interest:</label><br>
+            <label for="event1">AI Workshop  Rs: 150</label>
+            <input type="checkbox" id="event1" name="events" value="Event 1">
+            <br>
+            <label for="event2">Web Dev Workshop  Rs: 100</label>
+            <input type="checkbox" id="event2" name="events" value="Event 2">
+            <br>
+            <label for="event3">Cybersecurity Workshop  Rs: 200</label>
+            <input type="checkbox" id="event3" name="events" value="Event 3">
+            <br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select><br><br>
+
+            <label for="college">College/University:</label>
+            <input type="text" id="college" name="college" required><br><br>
+
+            <label for="year">Year of Study:</label>
+            <input type="number" id="year" name="year" min="1" max="4" required><br><br>
+
+            <label for="interests">Interests/Hobbies:</label><br>
+            <textarea id="interests" name="interests" rows="4" cols="50"></textarea><br><br>
+
+        <div>
+            <h2>Currency Conversion calulator</h2>
+            <label for="currency">Select Currency:</label>
+            <select id="currency" name="currency">
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="EUR">EUR</option>
+            </select><br><br>
+
+            <label for="amount">Amount in Selected Currency:</label>
+            <input type="number" id="amount" name="amount" required><br><br>
+
+            <label for="amount-inr">Amount in INR:</label>
+            <input type="text" id="amount-inr" disabled><br><br>
+        </div>
+            <p id="amt"></p>
+            <input type="submit" value="Register">
+        </form>
+    </main>
+
+    <footer>
+        <a href="#top">Back to Top</a>
+    </footer>
+
+    <script>
+        // JavaScript for currency conversion
+        const currencySelect = document.getElementById('currency');
+        const amountInput = document.getElementById('amount');
+        const amountInrInput = document.getElementById('amount-inr');
+
+        currencySelect.addEventListener('change', convertCurrency);
+        amountInput.addEventListener('input', convertCurrency);
+
+        function convertCurrency() {
+            const selectedCurrency = currencySelect.value;
+            const amount = parseFloat(amountInput.value);
+            const exchangeRates = {
+                USD: 83.01,
+                GBP: 100.98,
+                EUR: 87.90,
+                 // Example conversion rate, you can replace with real rates
+            };
+
+            if (exchangeRates[selectedCurrency] !== undefined) {
+                const inrAmount = (amount * exchangeRates[selectedCurrency]).toFixed(2);
+                amountInrInput.value = inrAmount + ' INR';
+            }
+        }
+        const registrationForm = document.getElementById('registration-form');
+        registrationForm.addEventListener('submit', function (e) {
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+
+            let valid = true;
+
+            // Check if Name is empty
+            if (nameInput.value.trim() === '') {
+                valid = false;
+                alert('Name is required.');
+            }
+
+            // Check if Email is empty or not valid
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (emailInput.value.trim() === '' || !emailPattern.test(emailInput.value)) {
+                valid = false;
+                alert('Please enter a valid email address.');
+            }
+
+            // Check if Phone Number is empty or not valid
+            const phonePattern = /^[0-9]{10}$/;
+            if (phoneInput.value.trim() === '' || !phonePattern.test(phoneInput.value)) {
+                valid = false;
+                alert('Please enter a valid 10-digit phone number.');
+            }
+
+            if (!valid) {
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+
+        const workshopCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+        const amtParagraph = document.getElementById('amt');
+
+        workshopCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', updateTotalAmount);
+        });
+
+        function updateTotalAmount() {
+            let totalAmount = 0;
+
+            workshopCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    if (checkbox.value === 'Event 1') {
+                        totalAmount += 150;
+                    } else if (checkbox.value === 'Event 2') {
+                        totalAmount += 100;
+                    } else if (checkbox.value === 'Event 3') {
+                        totalAmount += 200;
+                    }
+                }
+            });
+
+            amtParagraph.textContent = `Total Amount: Rs. ${totalAmount}`;
+        }
+
+    </script>
+</body>
+</html>

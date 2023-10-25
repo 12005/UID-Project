@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>College Workshops</title>
+</head>
+<body>
+    <header>
+        <h1 class="hover-effect">College Workshops</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="event1.html">AI Workshop</a></li>
+            <li><a href="event2.html">Web Dev Workshop</a></li>
+            <li><a href="event3.html">Cybersecurity Workshop</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2 class="hover-effect">Welcome to College Workshops</h2>
+        <div id="image-slider">
+            <img id="slider-image" src="image1.jpg" alt="Workshop Image">
+            <p id="slider-description">AI Workshop: Join us for an engaging workshop on Artificial Intelligence.</p>
+            <button id="prev-button" onclick="prevImage()">Previous</button>
+            <button id="next-button" onclick="nextImage()">Next</button>
+        </div>
+
+        <h2 class="hover-effect">About Us</h2>
+        <p>Welcome to College Workshops, your one-stop destination for skill development. We offer a range of workshops to help you enhance your knowledge and expertise in various fields.</p>
+        <p>Our mission is to empower students and professionals with the latest skills and knowledge required to excel in today's competitive world. Join us and unlock your potential.</p>
+
+        <div class="workshop-box">
+            <h2>Our Workshops</h2>
+            <div class="schedule-box">
+                <h3>Event Schedule</h3>
+                <table class="schedule-box">
+                    <tr>
+                        <th>Workshop</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr>
+                        <td>AI Workshop</td>
+                        <td>September 15, 2023</td>
+                        <td>10:00 AM - 4:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Web Dev Workshop</td>
+                        <td>October 5, 2023</td>
+                        <td>9:30 AM - 3:30 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Cybersecurity Workshop</td>
+                        <td>November 10, 2023</td>
+                        <td>11:00 AM - 5:00 PM</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3 class="hover-effect">Upcoming Workshops</h3>
+        <div class="workshop-box">
+            <h3>AI Workshop</h3>
+            <p>Date: September 15, 2023</p>
+            <p>Join us for an engaging workshop on Artificial Intelligence. Discover the latest advancements in AI, machine learning, and data analysis.</p>
+            <a class="cta-button" href="event1.html">Learn More</a>
+        </div>
+        <div class="workshop-box">
+            <h3>Web Development Workshop</h3>
+            <p>Date: October 5, 2023</p>
+            <p>Learn the essentials of web development, including HTML, CSS, and JavaScript. Build your own interactive websites from scratch.</p>
+            <a class="cta-button" href="event2.html">Learn More</a>
+        </div>
+        <div class="workshop-box">
+            <h3>Cybersecurity Workshop</h3>
+            <p>Date: November 10, 2023</p>
+            <p>Enhance your cybersecurity skills and protect digital assets. Learn about the latest threats and how to mitigate them.</p>
+            <a class="cta-button" href="event3.html">Learn More</a>
+        </div>
+    </main>
+    <footer>
+        <a href="#top">Back to Top</a>
+    </footer>
+
+    <script>
+        var images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+        var descriptions = [
+            "AI Workshop: Join us for an engaging workshop on Artificial Intelligence.",
+            "Web Dev Workshop: Learn the essentials of web development, including HTML, CSS, and JavaScript.",
+            "Cybersecurity Workshop: Enhance your cybersecurity skills and protect digital assets."
+        ];
+        var currentIndex = 0;
+
+        function prevImage() {
+            if (currentIndex === 0) {
+                currentIndex = images.length - 1;
+            } else {
+                currentIndex--;
+            }
+            updateImage();
+        }
+
+        function nextImage() {
+            if (currentIndex === images.length - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            updateImage();
+        }
+
+        function updateImage() {
+            var sliderImage = document.getElementById("slider-image");
+            var sliderDescription = document.getElementById("slider-description");
+
+            sliderImage.src = images[currentIndex];
+            sliderDescription.textContent = descriptions[currentIndex];
+        }
+
+        // Automatically advance to the next image every 5 seconds
+        setInterval(nextImage, 5000);
+    </script>
+</body>
+</html>
